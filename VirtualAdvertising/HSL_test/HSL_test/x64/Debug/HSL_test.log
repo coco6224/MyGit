@@ -3,6 +3,4 @@ c:\opencv\build\include\opencv2\core\mat.hpp(1965): warning C4819: 檔案含有�
 c:\opencv\build\include\opencv2\core\persistence.hpp : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
 c:\opencv\build\include\opencv2\core\utility.hpp : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
 c:\opencv\build\include\opencv2\core\utility.hpp : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\git\virtualadvertising\hsl_test\hsl_test\hsl_test.cpp(65): warning C4554: '|': 檢查運算子優先順序找出可能發生的錯誤; 使用括號釐清順序
-d:\git\virtualadvertising\hsl_test\hsl_test\hsl_test.cpp(78): warning C4244: '引數': 將 'double' 轉換為 'int'，由於類型不同，可能導致資料遺失
   HSL_test.vcxproj -> D:\Git\VirtualAdvertising\HSL_test\x64\Debug\HSL_test.exe
