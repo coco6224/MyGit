@@ -7,7 +7,7 @@ using namespace std;
 class sta{
 public:
   sta(){}
-  void average(vector<int> input){
+  void average(){
     int output = 0;
     for(vector<int>::iterator it = input.begin(); it!=input.end();it++){
       output+=*it;
@@ -15,7 +15,7 @@ public:
     avr = (output/input.size());
   }
 
-  void Max(vector<int> input){
+  void Max(){
     int output = -9999999999;
     for(vector<int>::iterator it = input.begin(); it!=input.end();it++){
       if(*it>output){
@@ -24,7 +24,7 @@ public:
     }
     MAX = output;
   }
-  void Min(vector<int> input){
+  void Min(){
     int output = 9999999999;
     for(vector<int>::iterator it = input.begin(); it!=input.end();it++){
       if(*it<output){
@@ -34,22 +34,22 @@ public:
     MIN = output;
   }
   int avr, MAX, MIN;
+  vector<int> input;
 };
 int main(){
   while(true){
     string in;
     cin>>in;
-    vector<int> nums;
     stringstream ss(in);
     int num;
+    sta stas;
     while(ss>>num){
-      nums.push_back(num);
+      stas.input.push_back(num);
     }
 
-    sta stas;
-    thread avr(stas.average(nums));
-    thread MAX(stas.Max(nums));
-    thread MIN(stas.Min(nums));
+    thread avr(stas.average);
+    thread MAX(stas.Max;
+    thread MIN(stas.Min);
 
     cout<<"The average value is "<<stas.avr<<endl;
     cout<<"The minimum value is "<<stas.MIN<<endl;
