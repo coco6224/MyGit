@@ -50,7 +50,10 @@ int main(){
     thread avr(stas.average);
     thread MAX(stas.Max);
     thread MIN(stas.Min);
-
+    avr.join();
+    MAX.join();
+    MIN.join();
+    
     cout<<"The average value is "<<stas.avr<<endl;
     cout<<"The minimum value is "<<stas.MIN<<endl;
     cout<<"The maximum value is "<<stas.MAX<<endl;
