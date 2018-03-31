@@ -48,7 +48,7 @@ int main(){
     }
 
     thread avr(stas.average);
-    thread MAX(stas.Max;
+    thread MAX(stas.Max);
     thread MIN(stas.Min);
 
     cout<<"The average value is "<<stas.avr<<endl;
