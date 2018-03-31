@@ -8,7 +8,7 @@ using namespace std;
 
 void avrage(vector<int>nums, int &output) {
 	int temp = 0;
-	for (vector<int>::iterator it = nums.begin(); it != nums.end();it++) {
+	for (vector<int>::iterator it = nums.begin(); it != nums.end(); it++) {
 		temp += *it;
 	}
 	output = temp / nums.size();
@@ -16,7 +16,7 @@ void avrage(vector<int>nums, int &output) {
 
 void minimum(vector<int>nums, int &output) {
 	int temp = 999999999;
-	for (vector<int>::iterator it = nums.begin(); it != nums.end();it++) {
+	for (vector<int>::iterator it = nums.begin(); it != nums.end(); it++) {
 		if (*it < temp) {
 			temp = *it;
 		}
@@ -26,7 +26,7 @@ void minimum(vector<int>nums, int &output) {
 
 void maximum(vector<int>nums, int &output) {
 	int temp = -9999999999;
-	for (vector<int>::iterator it = nums.begin(); it != nums.end();it++) {
+	for (vector<int>::iterator it = nums.begin(); it != nums.end(); it++) {
 		if (*it > temp) {
 			temp = *it;
 		}
@@ -42,6 +42,7 @@ int main()
 		stringstream ss;
 		int num;
 		vector<int>nums;
+		ss << s;
 		while (ss >> num) {
 			nums.push_back(num);
 		}
@@ -49,17 +50,16 @@ int main()
 			int avr;
 			int max;
 			int min;
-			thread avra(avrage, nums, avr);
-			thread mini(minimum, nums, min);
-			thread maxi(maximum, nums, max);
+			thread avra(avrage, ref(nums), ref(avr));
+			thread mini(minimum, ref(nums), ref(min));
+			thread maxi(maximum, ref(nums), ref(max));
 			avra.join();
 			mini.join();
 			maxi.join();
 			cout << "The avrage value is " << avr << endl;
 			cout << "The minimum value is " << min << endl;
-			cout << "The maximum value is " << max << endl;
+			cout << "The maximum value is " << max << endl << endl;
 		}
 	}
-    return 0;
+	return 0;
 }
-
