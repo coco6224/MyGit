@@ -16,14 +16,7 @@ void creatProcess(char *args[], bool flag){
     cout<<"Unable to fork"<<endl<<endl;
     exit(0);
   }else if(proc==0){
-    if(args[0]=="history"){
-      for(int i=his.size()-1;i>=0;i--){
-        list<string>::iterator it = his.begin();
-        advance(it, i);
-      }
-      cout<<endl;
-    }
-    else if(execvp(args[0], args)==-1){
+    if(execvp(args[0], args)==-1){
       cout<<"Unable to load the executable "<<args[0]<<endl<<endl;
       exit(0);
     }
@@ -41,30 +34,40 @@ int main(){
     cout<<"osh> ";
     string s;
     getline(cin, s);
-    char *args[81] = {};
-    string temp = "";
-    int count = 0;
-    bool flag = false;
-    for(int i=0;i<=s.length();i++){
-      if(i==s.length()||s[i]==' '){
-        args[count] = new char[temp.length()+1];
-        strcpy(args[count], temp.c_str());
-        count++;
-        temp = "";
-      }else if(i==s.length()-1&&s[i]=='&'){
-        flag=true;
-        break;
+    if(s=="history"){
+      for(int i=his.size()-1;i>=0;i--){
+        list<string>::iterator it = his.begin();
+        advance(it, i);
+        cout<<i<<" "<<*it<<endl;
       }
-      else{
-        temp+=s[i];
-      }
+      cout<<endl;
     }
-    if(args[0]!=NULL){
-      his.push_back(s);
-      if(his.size()>10){
-        his.pop_front();
+    else{
+      char *args[81] = {};
+      string temp = "";
+      int count = 0;
+      bool flag = false;
+      for(int i=0;i<=s.length();i++){
+        if(i==s.length()||s[i]==' '){
+          args[count] = new char[temp.length()+1];
+          strcpy(args[count], temp.c_str());
+          count++;
+          temp = "";
+        }else if(i==s.length()-1&&s[i]=='&'){
+          flag=true;
+          break;
+        }
+        else{
+          temp+=s[i];
+        }
       }
-      creatProcess(args, flag);
+      if(args[0]!=NULL){
+        his.push_back(s);
+        if(his.size()>10){
+          his.pop_front();
+        }
+        creatProcess(args, flag);
+      }
     }
   }
 }
