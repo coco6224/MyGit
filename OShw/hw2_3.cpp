@@ -3,6 +3,8 @@
 #include<string>
 #include <unistd.h>
 #include<stdlib.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 using namespace std;
 
 void creatProcess(char *args[], bool flag){
@@ -17,8 +19,9 @@ void creatProcess(char *args[], bool flag){
     }
     exit(0);
   }else if(flag){
-    wait(NULL);
-    cout<<"complete"<<endl<<endl;
+    int status;
+    wait(&status);
+    cout<<"complete"<<endl;
   }
 }
 
