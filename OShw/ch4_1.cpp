@@ -11,17 +11,17 @@ int Max;
 
 void average(vector<int>nums){
   int sum = 0;
-  for(vector<int>::iterator it = nums.begin();it!=nums.end();it++){
-    sum+=*it;
+  for(int i=0;i<nums.size();i++){
+    sum+=nums[i];
   }
   Avr = sum/nums.size();
 }
 
 void minimum(vector<int>nums){
   int m = 9999999999;
-  for(vector<int>::iterator it = nums.begin();it!=nums.end();it++){
-    if(*it<m){
-      m = *it;
+  for(int i=0;i<nums.size();i++){
+    if(nums[i]<m){
+      m = nums[i];
     }
   }
   Min = m;
@@ -29,9 +29,9 @@ void minimum(vector<int>nums){
 
 void maximum(vector<int>nums){
   int m = -9999999998;
-  for(vector<int>::iterator it = nums.begin();it!=nums.end();it++){
-    if(*it>m){
-      m = *it;
+  for(int i=0;i<nums.size();i++){
+    if(nums[i]>m){
+      m = nums[i];
     }
   }
   Max = m;
