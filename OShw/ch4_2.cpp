@@ -6,16 +6,14 @@ using namespace std;
 vector<int> fib;
 
 void generate(int n){
-  if(fib.size()<n-1){
+  if(n==1){
+    fib.push_back(0);
+  }else if(n==2){
     generate(n-1);
+    fib.push_back(1);
   }else{
-    if(n==0){
-      fib.push_back(0);
-    }else if(n==1){
-      fib.push_back(1);
-    }else{
-      fib.push_back(fib[n-2]+fib[n-3]);
-    }
+    generate(n-1);
+    fib.push_back(fib[n-2]+fib[n-3]);
   }
 }
 
