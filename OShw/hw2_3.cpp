@@ -4,7 +4,7 @@
 #include <unistd.h>
 using namespace std;
 
-void creatProcess(const char *args[]){
+void creatProcess(char *args[]){
   pid_t proc = fork();
   if(proc<0){
     cout<<"Unable to fork"<<endl<<endl;
