@@ -30,18 +30,10 @@ int main(){
     vector<int> nums;
     string s;
     getline(cin,s);
-    string temp = "";
-    for(int i=0;i<s.length();i++){
-      if(s[i]!=' '){
-        temp+=s[i];
-      }else{
-        stringstream ss;
-        int num;
-        ss<<temp;
-        ss>>num;
-        nums.push_back(num);
-        temp = "";
-      }
+    int num;
+    ss<<s;
+    while(ss>>num){
+      nums.push_back(num);
     }
 
     cout<<nums.size()<<endl;
