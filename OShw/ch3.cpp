@@ -43,6 +43,28 @@ int main(){
       cout<<endl;
     }
     else{
+      if(s=="!!"){
+        if(his.size()>0){
+          list<string>::iterator it = his.begin();
+          advance(it, his.size()-1);
+          s = *it;
+        }else{
+          continue;
+        }
+      }else if(s[0]=='!'){
+        stringstream tempp;
+        tempp<<s[1];
+        int num;
+        tempp>>num;
+        if(his.size()<num){
+          continue
+        }
+        else{
+          list<string>::iterator it = his.begin();
+          advance(it, his.size()-num);
+          s = *it;
+        }
+      }
       char *args[81] = {};
       string temp = "";
       int count = 0;
