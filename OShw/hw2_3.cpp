@@ -27,7 +27,7 @@ int main(){
     cout<<"osh> ";
     string s;
     getline(cin, s);
-    char *args[81];
+    char *args[81] = {};
     string temp = "";
     int count = 0;
     for(int i=0;i<s.length();i++){
@@ -40,6 +40,8 @@ int main(){
         temp = "";
       }
     }
-    creatProcess(args);
+    if(args[0]!=NULL){
+      creatProcess(args);
+    }
   }
 }
