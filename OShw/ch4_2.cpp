@@ -22,7 +22,8 @@ int main(){
     int num;
     cin>>num;
     cout<<endl;
-    generate(num);
+    thread g(generate, ref(num));
+    g.join();
     for(vector<int>::iterator it = fib.begin();it!=fib.end();it++){
       cout<<*it<<endl;
     }
