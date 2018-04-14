@@ -38,7 +38,7 @@ int main(){
       for(int i=his.size()-1;i>=0;i--){
         list<string>::iterator it = his.begin();
         advance(it, i);
-        cout<<i<<" "<<*it<<endl;
+        cout<<i+1<<" "<<*it<<endl;
       }
       cout<<endl;
     }
