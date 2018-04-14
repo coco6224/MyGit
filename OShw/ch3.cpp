@@ -18,7 +18,7 @@ void creatProcess(char *args[], bool flag){
       exit(0);
     }
     exit(0);
-  }else if(flag){
+  }else if(!flag){
     int status;
     wait(&status);
     cout<<"complete"<<endl;
