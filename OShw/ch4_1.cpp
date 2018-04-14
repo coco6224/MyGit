@@ -1,7 +1,7 @@
 #include<iostream>
 #include<thread>
 #include<string>
-#include<stringstream>
+#include<sstream>
 #include<vector>
 using namespace std;
 
@@ -35,7 +35,7 @@ int main(){
       if(s[i]!=' '){
         temp+=s[i];
       }else{
-        sstream ss;
+        stringstream ss;
         int num;
         ss<<temp;
         ss>>num;
