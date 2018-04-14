@@ -53,8 +53,6 @@ int main(){
       nums.push_back(num);
     }
 
-    cout<<nums.size()<<endl;
-
     thread t(average, ref(nums));
     thread tt(minimum, ref(nums));
     thread ttt(maximum, ref(nums));

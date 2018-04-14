@@ -19,8 +19,9 @@ void creatProcess(char *args[], bool flag){
     }
     exit(0);
   }else if(!flag){
-    int status;
-    wait(&status);
+    //int status;
+    //wait(&status);
+    waitpid(proc,NULL,0);
     cout<<"complete"<<endl;
   }
 }
