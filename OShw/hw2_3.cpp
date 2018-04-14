@@ -1,7 +1,25 @@
 #include<iostream>
 #include<cstring>
 #include<string>
+#include <unistd.h>
 using namespace std;
+
+void creatProcess(const char *args[]){
+  pid_t proc = fork();
+  if(proc<0){
+    cout<<"Unable to fork"<<endl<<endl;
+    exit();
+  }else if(proc==0){
+    if(execvp(args[0], args)==-1){
+      cout<<"Unable to load the executable "<<arg[0]<<endl<<endl;
+      exit();
+    }
+    exit();
+  }else{
+    int status;
+    wait(&status);
+  }
+}
 
 int main(){
   while(true){
@@ -21,6 +39,6 @@ int main(){
         temp = "";
       }
     }
-    cout<<args[0]<<endl;
+    creatProcess(args);
   }
 }
