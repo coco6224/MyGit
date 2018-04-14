@@ -9,16 +9,32 @@ int Avr;
 int Min;
 int Max;
 
-void average(){
-  Avr = 321;
+void average(vector<int>nums){
+  int sum = 0;
+  for(vector<int>::iterator it = nums.begin();it!=nums.end();it++){
+    sum+=*it;
+  }
+  Avr = sum/nums.size();
 }
 
-void minimum(){
-  Min = 456;
+void minimum(vector<int>nums){
+  int m = 9999999999;
+  for(vector<int>::iterator it = nums.begin();it!=nums.end();it++){
+    if(*it<m){
+      m = *it;
+    }
+  }
+  Min = m;
 }
 
-void maximum(){
-  Max = 1010;
+void maximum(vector<int>nums){
+  int m = -9999999998;
+  for(vector<int>::iterator it = nums.begin();it!=nums.end();it++){
+    if(*it>m){
+      m = *it;
+    }
+  }
+  Max = m;
 }
 
 int main(){
