@@ -55,9 +55,9 @@ int main(){
 
     cout<<nums.size()<<endl;
 
-    thread t(average);
-    thread tt(minimum);
-    thread ttt(maximum);
+    thread t(average, ref(nums));
+    thread tt(minimum, ref(nums));
+    thread ttt(maximum, ref(nums));
 
     int count = 0;
     while(count<3){
