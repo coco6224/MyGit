@@ -5,7 +5,7 @@
 #include<stdlib.h>
 using namespace std;
 
-void creatProcess(char *args[]){
+void creatProcess(char *args[], bool flag){
   pid_t proc = fork();
   if(proc<0){
     cout<<"Unable to fork"<<endl<<endl;
@@ -16,9 +16,9 @@ void creatProcess(char *args[]){
       exit(0);
     }
     exit(0);
-  }else{
-    //int status;
-    //wait(&status);
+  }else if(flag){
+    wait(NULL);
+    cout<<"complete"<<endl<<endl;
   }
 }
 
@@ -30,19 +30,23 @@ int main(){
     char *args[81] = {};
     string temp = "";
     int count = 0;
+    bool flag = false;
     for(int i=0;i<=s.length();i++){
       if(i==s.length()||s[i]==' '){
         args[count] = new char[temp.length()+1];
         strcpy(args[count], temp.c_str());
         count++;
         temp = "";
+      }else if(i==s.length()-1&&s[i]=='&'){
+        flag=true;
+        break;
       }
       else{
         temp+=s[i];
       }
     }
     if(args[0]!=NULL){
-      creatProcess(args);
+      creatProcess(args, flag);
     }
   }
 }
