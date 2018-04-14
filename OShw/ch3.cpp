@@ -5,7 +5,10 @@
 #include<stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include<list>
 using namespace std;
+
+list<string> his;
 
 void creatProcess(char *args[], bool flag){
   pid_t proc = fork();
@@ -13,7 +16,13 @@ void creatProcess(char *args[], bool flag){
     cout<<"Unable to fork"<<endl<<endl;
     exit(0);
   }else if(proc==0){
-    if(execvp(args[0], args)==-1){
+    if(args[0]=="history"){
+      for(int i=his.size()-1;i>=0;i--){
+        cout<<i<<" "<<his[i]<<endl;
+      }
+      cout<<endl;
+    }
+    else if(execvp(args[0], args)==-1){
       cout<<"Unable to load the executable "<<args[0]<<endl<<endl;
       exit(0);
     }
@@ -50,6 +59,10 @@ int main(){
       }
     }
     if(args[0]!=NULL){
+      his.push_back(s);
+      if(his.size()>10){
+        his.pop_front();
+      }
       creatProcess(args, flag);
     }
   }
