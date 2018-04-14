@@ -17,8 +17,8 @@ void creatProcess(char *args[], bool flag){
     exit(0);
   }else if(proc==0){
     if(args[0]=="history"){
-      for(int i=his.size()-1;i>=0;i--){
-        cout<<i<<" "<<his[i]<<endl;
+      for(list<string>::iterator it = his.end()-1;it!=his.begin()-1;it--){
+        cout<<distance(it, his.begin())<<" "<<*it<<endl;
       }
       cout<<endl;
     }
