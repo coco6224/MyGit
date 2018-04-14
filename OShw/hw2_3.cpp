@@ -2,6 +2,7 @@
 #include<cstring>
 #include<string>
 #include <unistd.h>
+#include<stdlib.h>
 using namespace std;
 
 void creatProcess(char *args[]){
@@ -11,7 +12,7 @@ void creatProcess(char *args[]){
     exit();
   }else if(proc==0){
     if(execvp(args[0], args)==-1){
-      cout<<"Unable to load the executable "<<arg[0]<<endl<<endl;
+      cout<<"Unable to load the executable "<<args[0]<<endl<<endl;
       exit();
     }
     exit();
