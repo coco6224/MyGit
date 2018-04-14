@@ -8,13 +8,14 @@ int main(){
     string s;
     getline(cin, s);
     char *args[81];
-    char *temp = "";
+    string temp = "";
     int count = 0;
     for(int i=0;i<s.length();i++){
       if(s[i]!=' '){
         temp+=s[i];
       }else{
-        args[count] = temp;
+        args[count] = new char[temp.length()+1];
+        strcpy(args[count], temp.c_str());
         count++;
         temp = "";
       }
