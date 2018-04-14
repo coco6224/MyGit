@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include<list>
+#include<sstream>
 using namespace std;
 
 list<string> his;
@@ -16,7 +17,8 @@ void creatProcess(char *args[], bool flag){
     cout<<"Unable to fork"<<endl<<endl;
     exit(0);
   }else if(proc==0){
-    if(execvp(args[0], args)==-1){
+    if(execvp(args[0], args)==-1){      
+      his.pop_back();
       cout<<"Unable to load the executable "<<args[0]<<endl<<endl;
       exit(0);
     }
@@ -49,6 +51,7 @@ int main(){
           advance(it, his.size()-1);
           s = *it;
         }else{
+	  cout<<"no command in history"<<endl;
           continue;
         }
       }else if(s[0]=='!'){
@@ -57,11 +60,12 @@ int main(){
         int num;
         tempp>>num;
         if(his.size()<num){
-          continue
+	  cout<<"no such command in history"<<endl;
+          continue;
         }
         else{
           list<string>::iterator it = his.begin();
-          advance(it, his.size()-num);
+          advance(it, num-1);
           s = *it;
         }
       }
