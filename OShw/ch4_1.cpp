@@ -31,6 +31,7 @@ int main(){
     string s;
     getline(cin,s);
     int num;
+    stringstream ss;
     ss<<s;
     while(ss>>num){
       nums.push_back(num);
