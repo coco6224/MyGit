@@ -33,25 +33,25 @@ public class UserInterface {
 		}
 		public void setMainWindow(){
 			mainWin=new JFrame("Piggy Bank");
-			mainWin.setSize(600,400);
+			mainWin.setSize(700,500);
 			mainWin.setVisible(true);
+
+			//Option Panel
+			JPanel op_pane = new JPanel();
+			op_pane.setBounds(15,15,130,400);
 			
-			JButton temp = new JButton("temp");
-			temp.addActionListener(new TempClicked());
-			temp.setBounds(118,200,100,40);
+			//logo
+			JLabel logo = new JLabel(new ImageIcon("mainWin.png"));
+			logo.setBounds(0,0,130,100);
+			op_pane.add(logo);
 			
 			Container c = mainWin.getContentPane();
 			c.setLayout(null);
-			c.add(temp);
+			c.add(op_pane);
 		}
 		class TempClicked implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
-				 JLabel a = new JLabel("A");
-				 Container c = mainWin.getContentPane();
-				 c.add(a);
-				 mainWin.revalidate();
-				 mainWin.repaint();
-				 
+				
 			 }  
 		}
 	}
