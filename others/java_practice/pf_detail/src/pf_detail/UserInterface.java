@@ -34,8 +34,7 @@ public class UserInterface {
 			createAcc.setDefaultCloseOperation(createAcc.EXIT_ON_CLOSE);
 			
 			//title
-			JLabel signUp = new JLabel("Sign Up");
-			signUp.setFont(new Font(Font.SERIF,Font.ITALIC,35));
+			JLabel signUp = new JLabel(new ImageIcon("sign up.png"));
 			signUp.setBounds(18,15,200,50);
 			
 			//TextField for acc & pw
@@ -45,12 +44,12 @@ public class UserInterface {
 			password = new JPasswordField();
 			JLabel nameLabel = new JLabel("Enter Name");
 			name = new JTextField();
-			accLabel.setBounds(18, 70, 200, 20);
-			account.setBounds(18,90,200,40);
-			pwLabel.setBounds(18, 150, 200, 20);
-			password.setBounds(18,170,200,40);
-			nameLabel.setBounds(18, 230, 200, 20);
-			name.setBounds(18,250,200,40);
+			accLabel.setBounds(18, 90, 200, 20);
+			account.setBounds(18,110,200,40);
+			pwLabel.setBounds(18, 170, 200, 20);
+			password.setBounds(18,190,200,40);
+			nameLabel.setBounds(18, 250, 200, 20);
+			name.setBounds(18,270,200,40);
 			
 			//buttons
 			JButton toSignUp = new JButton("Sign UP");
