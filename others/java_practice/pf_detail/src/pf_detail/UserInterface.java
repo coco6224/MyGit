@@ -1,7 +1,11 @@
 package pf_detail;
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+
+import org.omg.CORBA.Current;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.DriverManager;
@@ -13,13 +17,44 @@ public class UserInterface {
 	//UI
 	LoginInfo log_info;
 	CreAccInfo creAcc_info;
+	MainWindowInfo mainWin_info;
 	
 	//Initialize
 	UserInterface(){
 		log_info = new LoginInfo();
+		current.setVisible(true);
 	}
 		
 	//UI Info
+	class MainWindowInfo{
+		private JFrame mainWin;
+		MainWindowInfo(){
+			setMainWindow();
+		}
+		public void setMainWindow(){
+			mainWin=new JFrame("Piggy Bank");
+			mainWin.setSize(600,400);
+			mainWin.setVisible(true);
+			
+			JButton temp = new JButton("temp");
+			temp.addActionListener(new TempClicked());
+			temp.setBounds(118,200,100,40);
+			
+			Container c = mainWin.getContentPane();
+			c.setLayout(null);
+			c.add(temp);
+		}
+		class TempClicked implements ActionListener{
+			public void actionPerformed(ActionEvent e) {
+				 JLabel a = new JLabel("A");
+				 Container c = mainWin.getContentPane();
+				 c.add(a);
+				 mainWin.revalidate();
+				 mainWin.repaint();
+				 
+			 }  
+		}
+	}
 	class CreAccInfo{
 		JTextField account;
 		JTextField name;
@@ -82,38 +117,46 @@ public class UserInterface {
 		}
 		class toSignUpClicked implements ActionListener {
 			 public void actionPerformed(ActionEvent e) {
-				 try{
-					 //connect
-					 Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "rita80221");
-					 
-					 //query
-					 PreparedStatement ps = c.prepareStatement("select mpw from pf_detail.memberInfo where mac=?;");
-					 ps.setString(1, account.getText());
-					 ResultSet r =ps.executeQuery();
-					 
-					 //check account
-					 if(r.next()){
-						 JOptionPane.showMessageDialog(null,"Account "+account.getText()+" has already existed", "Sign up failed",JOptionPane.INFORMATION_MESSAGE);
-					 }else{
-						 //insert
-						 ps=c.prepareStatement("insert into pf_detail.memberinfo(mac,mpw,mname) values(?,?,?)");
-						 ps.setString(1, account.getText());
-						 ps.setString(2, password.getText());
-						 ps.setString(3, name.getText());
-						 ps.executeUpdate();
-						 ps.close();
-						 //done
-						 JOptionPane.showMessageDialog(null,"Sign up successfully!", "Signed Up",JOptionPane.INFORMATION_MESSAGE);
+				 if(account.getText().length()==0){
+					 JOptionPane.showMessageDialog(null,"Please enter account", "Sign up failed",JOptionPane.INFORMATION_MESSAGE);
+				 }else if (password.getText().length()==0){
+					 JOptionPane.showMessageDialog(null,"Please enter password", "Sign up failed",JOptionPane.INFORMATION_MESSAGE);
+				 }else if (name.getText().length()==0){
+					 JOptionPane.showMessageDialog(null,"Please enter name", "Sign up failed",JOptionPane.INFORMATION_MESSAGE);
+				 }else{
+					 try{
+						 //connect
+						 Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "rita80221");
 						 
-						 //back to login
-						 current.setVisible(false);
-						 log_info = new LoginInfo();
-						 current.setVisible(true);
+						 //query
+						 PreparedStatement ps = c.prepareStatement("select mpw from pf_detail.memberInfo where mac=?;");
+						 ps.setString(1, account.getText());
+						 ResultSet r =ps.executeQuery();
+						 
+						 //check account
+						 if(r.next()){
+							 JOptionPane.showMessageDialog(null,"Account "+account.getText()+" has already existed", "Sign up failed",JOptionPane.INFORMATION_MESSAGE);
+						 }else{
+							 //insert
+							 ps=c.prepareStatement("insert into pf_detail.memberinfo(mac,mpw,mname) values(?,?,?)");
+							 ps.setString(1, account.getText());
+							 ps.setString(2, password.getText());
+							 ps.setString(3, name.getText());
+							 ps.executeUpdate();
+							 ps.close();
+							 //done
+							 JOptionPane.showMessageDialog(null,"Sign up successfully!", "Signed Up",JOptionPane.INFORMATION_MESSAGE);
+							 
+							 //back to login
+							 current.setVisible(false);
+							 log_info = new LoginInfo();
+							 current.setVisible(true);
+						 }
 					 }
+					 catch(Exception err){
+						 System.out.println(err.toString());
+					 };
 				 }
-				 catch(Exception err){
-					 System.out.println(err.toString());
-				 };
 			 }  
 		}
 	}
@@ -162,7 +205,6 @@ public class UserInterface {
 			c.add(toLogin);
 			c.add(CreAcc);
 			current=login;
-			current.setVisible(true);
 		}
 		class CreAccClicked implements ActionListener {
 			 public void actionPerformed(ActionEvent e) {
@@ -186,7 +228,8 @@ public class UserInterface {
 					 if(r.next()){
 						 //check password
 						 if(r.getString("mpw").equals(password.getText())){
-							 System.out.println("login successfully");
+							 current.setVisible(false);
+							 mainWin_info = new MainWindowInfo();
 						 }else{
 							 JOptionPane.showMessageDialog(null,"Wrong password!", "Login failed",JOptionPane.INFORMATION_MESSAGE);
 						 }
