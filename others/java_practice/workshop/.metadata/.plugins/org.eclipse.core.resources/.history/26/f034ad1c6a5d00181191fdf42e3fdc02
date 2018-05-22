@@ -25,7 +25,6 @@ public class UserInterface {
 	LoginInfo log_info;
 	CreAccInfo creAcc_info;
 	MainWindowInfo mainWin_info;
-	JFrame addFrame;
 	
 	//Initialize
 	UserInterface(){
@@ -38,9 +37,7 @@ public class UserInterface {
 		JPanel op_pane;
 		JPanel ginfo_pane;
 		JComboBox group;
-		JTextField account;
 		int gnum;
-		String gname;
 		private JFrame mainWin;
 		MainWindowInfo(){
 			setMainWindow();
@@ -93,16 +90,10 @@ public class UserInterface {
 				 op_pane.add(ginfo);
 			 	
 				 //button-Invite
-				 JButton add = new JButton("Add member");
+				 JButton add = new JButton("Invite");
 				 add.addActionListener(new AddClicked());
 				 add.setBounds(0, 260,130,30);
 				 op_pane.add(add);
-				 
-				 //
-				 JButton quit = new JButton("Quit group");
-				 quit.addActionListener(new QuitClicked());
-				 quit.setBounds(0, 310,130,30);
-				 op_pane.add(quit);
 				 
 			 	 Container cont = mainWin.getContentPane();
 			 	 cont.setLayout(null);
@@ -127,9 +118,7 @@ public class UserInterface {
 		}
 		class AddClicked implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
-				gname = group.getSelectedItem().toString();
-				
-				addFrame = new JFrame("Add member");
+				JFrame addFrame = new JFrame("Invite");
 				addFrame.setSize(250, 150);
 				
 				//label
@@ -140,13 +129,12 @@ public class UserInterface {
 				gname.setBounds(10,30,210,20);
 				
 				//textfield
-				account = new JTextField();
+				JTextField account = new JTextField();
 				account.setBounds(10,60,150,30);
 				
 				//button
 				JButton add = new JButton("Add");
 				add.setBounds(165,60,60,30);
-				add.addActionListener(new AddMemClicked());
 				
 				//Container
 				Container c=addFrame.getContentPane();
@@ -157,107 +145,6 @@ public class UserInterface {
 				c.add(add);
 				
 				addFrame.setVisible(true);
-			 }  
-		}
-		class QuitClicked implements ActionListener{
-			public void actionPerformed(ActionEvent e) {
-				gname = group.getSelectedItem().toString();
-				int res = JOptionPane.showConfirmDialog(mainWin,"Are you sure to quit "+gname+"?","Confirm",
-                    JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE);
-				if(res==JOptionPane.OK_OPTION){
-					try{
-						Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "rita80221");
-						PreparedStatement ps;
-						ResultSet r;
-						
-						int myID;
-						ps = c.prepareStatement("select mid from pf_detail.memberinfo where mac=?");
-						ps.setString(1, myAccount);
-						r=ps.executeQuery();						
-						
-						if(r.next()){
-							myID=r.getInt("mid");
-							ps=c.prepareStatement("select gid from pf_detail.groupinfo where gname=?");
-							ps.setString(1, gname);
-							r=ps.executeQuery();
-							if(r.next()){
-								gnum=r.getInt("gid");
-								ps=c.prepareStatement("delete from pf_detail.belong where gid=? and mid=?");
-								ps.setInt(1, gnum);
-								ps.setInt(2,myID);
-								ps.executeUpdate();
-								ps=c.prepareStatement("delete from pf_detail.detail where dbelong=? and dpayer=?");
-								ps.setInt(1, gnum);
-								ps.setInt(2,myID);
-								ps.executeUpdate();
-							}
-						}
-						
-						r.close();
-						ps.close();
-						c.close();
-					}catch(Exception err){
-						
-					}
-				}else{
-					System.out.println("cancel");
-				}
-			}  
-		}
-		class AddMemClicked implements ActionListener{
-			public void actionPerformed(ActionEvent e) {
-				if(account.getText().equals("")){
-					JOptionPane.showMessageDialog(null,"Please enter account", "Add member failed",JOptionPane.INFORMATION_MESSAGE);
-				}
-				else{
-					try{
-						Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "rita80221");
-						PreparedStatement ps;
-						ResultSet r;
-						
-						int newID;
-						ps = c.prepareStatement("select mid from pf_detail.memberinfo where mac=?");
-						ps.setString(1, account.getText());
-						r=ps.executeQuery();						
-						
-						if(r.next()){
-							newID=r.getInt("mid");
-							ps=c.prepareStatement("select gid from pf_detail.groupinfo where gname=?");
-							ps.setString(1, gname);
-							r=ps.executeQuery();
-							if(r.next()){
-								gnum=r.getInt("gid");
-							}
-							ps=c.prepareStatement("select * from pf_detail.belong where gid=? and mid=?");
-							ps.setInt(1, gnum);
-							ps.setInt(2, newID);
-							r=ps.executeQuery();
-							if(r.next()){
-								JOptionPane.showMessageDialog(null,"Account "+account.getText()+" is already in the group", "Add member failed",JOptionPane.INFORMATION_MESSAGE);
-							}
-							else{
-								ps=c.prepareStatement("insert into pf_detail.belong(gid,mid) values(?,?)");
-								ps.setInt(1, gnum);
-								ps.setInt(2, newID);
-								ps.executeUpdate();
-								JOptionPane.showMessageDialog(null,"Done!", "Add member successfully",JOptionPane.INFORMATION_MESSAGE);
-								addFrame.setVisible(false);
-								setGinfoPanel(gname);
-								mainWin.setContentPane(ginfo_pane);
-								ginfo_pane.revalidate();
-							}
-						}
-						else{
-							JOptionPane.showMessageDialog(null,"Account "+account.getText()+" does not exist.", "Add member failed",JOptionPane.INFORMATION_MESSAGE);
-						}
-						
-						r.close();
-						ps.close();
-						c.close();
-					}catch(Exception err){
-						System.out.println(err.toString());
-					}
-				}
 			 }  
 		}
 		

@@ -190,6 +190,8 @@ public class UserInterface {
 								ps.setInt(1, gnum);
 								ps.setInt(2,myID);
 								ps.executeUpdate();
+								mainWin.setContentPane(op_pane);
+								op_pane.revalidate();
 							}
 						}
 						

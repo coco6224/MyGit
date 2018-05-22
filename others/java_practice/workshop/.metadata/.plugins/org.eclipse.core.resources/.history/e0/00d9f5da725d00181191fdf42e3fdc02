@@ -106,7 +106,9 @@ public class UserInterface {
 				 
 			 	 Container cont = mainWin.getContentPane();
 			 	 cont.setLayout(null);
-				 cont.add(op_pane);
+				 mainWin.setContentPane(op_pane);
+			 	 //cont.add(op_pane);
+				 op_pane.revalidate();
 				 
 				 //close
 				 r.close();
@@ -190,6 +192,7 @@ public class UserInterface {
 								ps.setInt(1, gnum);
 								ps.setInt(2,myID);
 								ps.executeUpdate();
+								setMainWindow();
 							}
 						}
 						

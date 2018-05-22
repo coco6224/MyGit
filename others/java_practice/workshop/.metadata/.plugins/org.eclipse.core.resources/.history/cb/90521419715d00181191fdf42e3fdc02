@@ -162,43 +162,10 @@ public class UserInterface {
 		class QuitClicked implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				gname = group.getSelectedItem().toString();
-				int res = JOptionPane.showConfirmDialog(mainWin,"Are you sure to quit "+gname+"?","Confirm",
+				int r = JOptionPane.showConfirmDialog(mainWin,"Are you sure to quit "+gname+"?","Confirm",
                     JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE);
-				if(res==JOptionPane.OK_OPTION){
-					try{
-						Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "rita80221");
-						PreparedStatement ps;
-						ResultSet r;
-						
-						int myID;
-						ps = c.prepareStatement("select mid from pf_detail.memberinfo where mac=?");
-						ps.setString(1, myAccount);
-						r=ps.executeQuery();						
-						
-						if(r.next()){
-							myID=r.getInt("mid");
-							ps=c.prepareStatement("select gid from pf_detail.groupinfo where gname=?");
-							ps.setString(1, gname);
-							r=ps.executeQuery();
-							if(r.next()){
-								gnum=r.getInt("gid");
-								ps=c.prepareStatement("delete from pf_detail.belong where gid=? and mid=?");
-								ps.setInt(1, gnum);
-								ps.setInt(2,myID);
-								ps.executeUpdate();
-								ps=c.prepareStatement("delete from pf_detail.detail where dbelong=? and dpayer=?");
-								ps.setInt(1, gnum);
-								ps.setInt(2,myID);
-								ps.executeUpdate();
-							}
-						}
-						
-						r.close();
-						ps.close();
-						c.close();
-					}catch(Exception err){
-						
-					}
+				if(r==JOptionPane.OK_OPTION){
+					System.out.println("delete from");
 				}else{
 					System.out.println("cancel");
 				}
