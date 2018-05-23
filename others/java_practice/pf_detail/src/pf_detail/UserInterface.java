@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.awt.event.*;
 import java.util.regex.*;
 import java.sql.Date;
+import java.util.* ;
+
 import javax.swing.*;
+import javax.swing.table.TableColumnModel;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +15,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 
 public class UserInterface {
+	private boolean isInteger(String str) {    
+	    Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");    
+	    return pattern.matcher(str).matches();    
+	}
 	public JFrame current = new JFrame();
 	//attribute
 	String myAccount;
@@ -44,6 +51,10 @@ public class UserInterface {
 		}
 		public void setMainWindow(){
 			try{
+				mainWin=new JFrame("Piggy Bank");
+				 mainWin.setDefaultCloseOperation(mainWin.EXIT_ON_CLOSE);
+				 mainWin.setSize(700,500);
+				 mainWin.setVisible(true);
 				setOpPane(); 
 				
 			 	 Container cont = mainWin.getContentPane();
@@ -59,12 +70,9 @@ public class UserInterface {
 			try{
 				 //connect
 				 Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "rita80221");
-				 mainWin=new JFrame("Piggy Bank");
-				 mainWin.setSize(700,500);
-				 mainWin.setVisible(true);
 				 PreparedStatement ps;
-				 ResultSet r;
-	
+				 ResultSet r;	
+				 
 				 //Option Panel
 				 op_pane = new JPanel();
 				 op_pane.setBounds(15,15,130,470);
@@ -99,26 +107,46 @@ public class UserInterface {
 				 //button-ginfo
 				 JButton ginfo = new JButton("Group Info");
 				 ginfo.addActionListener(new GinfoClicked());
-				 ginfo.setBounds(0,195,130,30);
+				 ginfo.setBounds(0,225,130,30);
 				 op_pane.add(ginfo);
 			 	
 				 //button-Invite
 				 JButton add = new JButton("Add member");
 				 add.addActionListener(new AddClicked());
-				 add.setBounds(0, 235,130,30);
+				 add.setBounds(0, 260,130,30);
 				 op_pane.add(add);
 				 
 				 //button-Quit
 				 JButton quit = new JButton("Quit group");
 				 quit.addActionListener(new QuitClicked());
-				 quit.setBounds(0, 275,130,30);
+				 quit.setBounds(0, 295,130,30);
 				 op_pane.add(quit);
 
 				 //button-AddDetail
 				 JButton addDetail = new JButton("Add Detail");
 				 addDetail.addActionListener(new AddDetailClicked());
-				 addDetail.setBounds(0, 315,130,30);
+				 addDetail.setBounds(0, 190,130,30); //315,130
 				 op_pane.add(addDetail);
+				 
+
+				//button-refresh
+				 JButton refresh = new JButton("Refresh");
+				 refresh.addActionListener(new RefreshClicked());
+				 refresh.setBounds(0, 335,130,30);
+				 op_pane.add(refresh);
+				 
+				//button-createGroup
+				 JButton createGroup = new JButton("Create group");
+				 createGroup.addActionListener(new CreateGClicked());
+				 createGroup.setBounds(0, 370,130,30);
+				 op_pane.add(createGroup);
+				
+				//button-logout
+				 JButton logOut = new JButton("log out");
+				 logOut.addActionListener(new LogOutClicked());
+				 logOut.setBounds(0, 405,130,30);
+				 op_pane.add(logOut);
+				 
 				 //close
 				 r.close();
 				 ps.close();
@@ -129,6 +157,52 @@ public class UserInterface {
 			 };
 		}
 		
+		class CreateGClicked implements ActionListener{
+			public void actionPerformed(ActionEvent e){
+				try{
+					String newG = JOptionPane.showInputDialog(null,"Enter Group Name:","Create Group",JOptionPane.QUESTION_MESSAGE);
+					Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","rita80221");
+					PreparedStatement ps = c.prepareStatement("insert into pf_detail.groupinfo(gname) values(?);");
+					ps.setString(1, newG);
+					ps.executeUpdate();
+					
+					ps=c.prepareStatement("select gid from pf_detail.groupinfo where gname=?;");
+					ps.setString(1, newG);
+					ResultSet r = ps.executeQuery();
+						if(r.next()){
+						ps = c.prepareStatement("insert into pf_detail.belong(mid,gid) values(?,?);");
+						ps.setInt(1, myId);
+						ps.setInt(2, r.getInt("gid"));
+						ps.executeUpdate();
+					}
+					ps=c.prepareStatement("select gname from (pf_detail.groupinfo g join pf_detail.belong b on g.gid=b.gid)"
+					 		+ "join pf_detail.memberinfo m on b.mid = m.mid where mac=?");
+					 ps.setString(1, myAccount);
+					r=ps.executeQuery();
+					 ArrayList<String> n=new ArrayList<String>();
+					 while(r.next()){
+						 n.add(r.getString("gname"));
+					 }
+					 group.removeAllItems();
+					 for(String temp:n){
+						 group.addItem(temp);
+					 }
+					 c.close();
+					 ps.close();
+					 r.close();
+				 }catch(Exception err){
+					 System.out.println(err.toString());
+				 }
+			}
+		}
+		
+		class LogOutClicked implements ActionListener{
+			public void actionPerformed(ActionEvent e) {
+				mainWin.setVisible(false);
+				log_info = new LoginInfo();
+				current.setVisible(true);
+			 }  
+		}
 		class AddDetailClicked implements ActionListener{
 			JTextField year; 
 			JTextField month;
@@ -236,7 +310,7 @@ public class UserInterface {
 				//Button addD
 				JButton addD = new JButton("Add detail");
 				addD.setFont(new Font("Avril", Font.PLAIN, 20));
-				addD.setBounds(350,340,150,30);
+				addD.setBounds(350,390,150,30);
 				addD.addActionListener(new AddDClicked());
 				show_pane.add(addD);
 				
@@ -245,10 +319,7 @@ public class UserInterface {
 				mainWin.setContentPane(addD_pane);
 				addD_pane.revalidate();
 			 } 
-			public boolean isInteger(String str) {    
-			    Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");    
-			    return pattern.matcher(str).matches();    
-			}  
+  
 			class AddDClicked implements ActionListener{
 				public void actionPerformed(ActionEvent e) {
 					if(detail.getText().equals("")){	//check detail not null
@@ -278,11 +349,14 @@ public class UserInterface {
 											ps=c.prepareStatement("insert into pf_detail.detail(ddetail,dnum,dpayer,dupdateby,dbelong) "
 													+"values(?,?,?,?,?)");
 											ps.setString(1, detail.getText());
-											ps.setInt(2, numint);
+											ps.setInt(2, -numint);
 											ps.setInt(3, r.getInt("mid"));
 											ps.setInt(4, myId);
 											ps.setInt(5, gid);
 											ps.executeUpdate();
+											setGinfoPanel(gname);
+											mainWin.setContentPane(ginfo_pane);
+											ginfo_pane.revalidate();
 										}
 									}
 									c.close();
@@ -298,64 +372,79 @@ public class UserInterface {
 							}
 							else{
 								if(isInteger(year.getText())&&isInteger(month.getText())&&isInteger(date.getText())){
+									int yint=Integer.parseInt(year.getText());
 									int mint=Integer.parseInt(month.getText());
 									int dint=Integer.parseInt(date.getText());
-									if(mint<=12&&mint>0){
-										Boolean flag = false;
-										if(mint<=7){
-											if((mint%2)==1&&dint>0&&dint<=31){
-												flag=true;
-											}else if(mint==2&&dint>0&&dint<=29){
-												flag=true;
-											}else if(mint!=2&&mint%2==0&&dint>0&&dint<=30){
-												flag=true;
-											}
-										}else{
-											if((mint%2)==0&&dint>0&&dint<=31){
-												flag=true;
-											}else{
-												if(mint%2==1&&dint>0&&dint<=30){
+									Boolean flag = false;
+									if(yint>=1996&&yint<=9999){
+										if(mint<=12&&mint>0){
+											if(mint<=7){
+												if((mint%2)==1&&dint>0&&dint<=31){
+													flag=true;
+												}else if(mint==2&&dint>0&&dint<=29){
+													flag=true;
+												}else if(mint!=2&&mint%2==0&&dint>0&&dint<=30){
 													flag=true;
 												}
-											}
-										}
-										if(flag){
-											try{
-												Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","rita80221");
-												PreparedStatement ps = c.prepareStatement("select gid from pf_detail.groupinfo where gname=?");
-												ps.setString(1, gname);
-												ResultSet r = ps.executeQuery();
-												int gid;
-												if(r.next()){
-													gid=r.getInt("gid");
-													ps = c.prepareStatement("select mid from pf_detail.memberinfo where mname=?");
-													ps.setString(1, payer.getSelectedItem().toString());
-													r =ps.executeQuery();
-													if(r.next()){
-														ps=c.prepareStatement("insert into pf_detail.detail(ddetail,dnum,dpayer,dupdateby,dbelong,ddate) "
-																+"values(?,?,?,?,?,?)");
-														ps.setString(1, detail.getText());
-														ps.setInt(2, numint);
-														ps.setInt(3, r.getInt("mid"));
-														ps.setInt(4, myId);
-														ps.setInt(5, gid);
-														ps.setDate(6, new Date(Integer.parseInt(year.getText()),Integer.parseInt(month.getText()),Integer.parseInt(date.getText())));
-														ps.executeUpdate();
+											}else{
+												if((mint%2)==0&&dint>0&&dint<=31){
+													flag=true;
+												}else{
+													if(mint%2==1&&dint>0&&dint<=30){
+														flag=true;
 													}
 												}
-												c.close();
-												ps.close();
-												r.close();
 											}
-											catch(Exception err){
-												System.out.println(err.toString());
+											if(flag){
+												try{
+													Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","rita80221");
+													PreparedStatement ps = c.prepareStatement("select gid from pf_detail.groupinfo where gname=?");
+													ps.setString(1, gname);
+													ResultSet r = ps.executeQuery();
+													int gid;
+													if(r.next()){
+														gid=r.getInt("gid");
+														ps = c.prepareStatement("select mid from pf_detail.memberinfo where mname=?");
+														ps.setString(1, payer.getSelectedItem().toString());
+														r =ps.executeQuery();
+														if(r.next()){
+															ps=c.prepareStatement("insert into pf_detail.detail(ddetail,dnum,dpayer,dupdateby,dbelong,ddate) "
+																	+"values(?,?,?,?,?,?)");
+															ps.setString(1, detail.getText());
+															ps.setInt(2, -numint);
+															ps.setInt(3, r.getInt("mid"));
+															ps.setInt(4, myId);
+															ps.setInt(5, gid);
+															String startDate="01-02-2013";
+															
+															java.text.SimpleDateFormat f = new java.text.SimpleDateFormat("yyyyMMdd");
+															java.util.Date JDate = f.parse(year.getText()+month.getText()+date.getText());														
+															java.sql.Date sqlDate = new java.sql.Date(JDate.getTime());
+															
+															ps.setDate(6, sqlDate);
+															ps.executeUpdate();
+															setGinfoPanel(gname);
+															mainWin.setContentPane(ginfo_pane);
+															ginfo_pane.revalidate();
+														}
+													}
+													c.close();
+													ps.close();
+													r.close();
+												}
+												catch(Exception err){
+													System.out.println(err.toString());
+												}
 											}
+											else{
+												JOptionPane.showMessageDialog(null,"Invalid date value.", "Add detail failed",JOptionPane.INFORMATION_MESSAGE);
+											}	
+										}else{
+											JOptionPane.showMessageDialog(null,"Invalid month value.", "Add detail failed",JOptionPane.INFORMATION_MESSAGE);
 										}
-										else{
-											JOptionPane.showMessageDialog(null,"Invalid date number.", "Add detail failed",JOptionPane.INFORMATION_MESSAGE);
-										}	
-									}else{
-										JOptionPane.showMessageDialog(null,"Invalid month number.", "Add detail failed",JOptionPane.INFORMATION_MESSAGE);
+									}
+									else{
+										JOptionPane.showMessageDialog(null,"Invalid year value.", "Add detail failed",JOptionPane.INFORMATION_MESSAGE);
 									}
 								}
 								else{
@@ -372,6 +461,44 @@ public class UserInterface {
 		}
 		class GinfoClicked implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
+				setGinfoPanel(group.getSelectedItem().toString());
+				mainWin.setContentPane(ginfo_pane);
+				ginfo_pane.revalidate();
+			 }  
+		}
+		class RefreshClicked implements ActionListener{
+			public void actionPerformed(ActionEvent e) {
+				setOpPane();
+				JPanel temp = new JPanel();
+				temp.setLayout(null);
+				temp.add(op_pane);
+				mainWin.setContentPane(temp);
+				temp.revalidate();
+			 }  
+		}
+		class ResetClicked implements ActionListener{
+			public void actionPerformed(ActionEvent e) {
+				int res = JOptionPane.showConfirmDialog(mainWin,"Are you sure to reset?","Confirm",
+	                    JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE);
+					if(res==JOptionPane.OK_OPTION){
+						try{
+							Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","rita80221");
+							PreparedStatement ps = c.prepareStatement("select gid from pf_detail.groupinfo where gname=?;");
+							ps.setString(1, gname);
+							ResultSet r =ps.executeQuery();
+							if(r.next()){
+								ps = c.prepareStatement("delete from pf_detail.detail where dbelong=?;");
+								ps.setInt(1, r.getInt("gid"));
+								ps.executeUpdate();
+							}
+							r.close();
+							c.close();
+							ps.close();
+						}
+						catch(Exception err){
+							System.out.println(err.toString());
+						}
+					}
 				setGinfoPanel(group.getSelectedItem().toString());
 				mainWin.setContentPane(ginfo_pane);
 				ginfo_pane.revalidate();
@@ -409,7 +536,63 @@ public class UserInterface {
 				c.add(add);
 				
 				addFrame.setVisible(true);
-			 }  
+			 }
+			class AddMemClicked implements ActionListener{
+				public void actionPerformed(ActionEvent e) {
+					if(account.getText().equals("")){
+						JOptionPane.showMessageDialog(null,"Please enter account", "Add member failed",JOptionPane.INFORMATION_MESSAGE);
+					}
+					else{
+						try{
+							Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "rita80221");
+							PreparedStatement ps;
+							ResultSet r;
+							
+							int newID;
+							ps = c.prepareStatement("select mid from pf_detail.memberinfo where mac=?");
+							ps.setString(1, account.getText());
+							r=ps.executeQuery();						
+							
+							if(r.next()){
+								newID=r.getInt("mid");
+								ps=c.prepareStatement("select gid from pf_detail.groupinfo where gname=?");
+								ps.setString(1, gname);
+								r=ps.executeQuery();
+								if(r.next()){
+									gnum=r.getInt("gid");
+								}
+								ps=c.prepareStatement("select * from pf_detail.belong where gid=? and mid=?");
+								ps.setInt(1, gnum);
+								ps.setInt(2, newID);
+								r=ps.executeQuery();
+								if(r.next()){
+									JOptionPane.showMessageDialog(null,"Account "+account.getText()+" is already in the group", "Add member failed",JOptionPane.INFORMATION_MESSAGE);
+								}
+								else{
+									ps=c.prepareStatement("insert into pf_detail.belong(gid,mid) values(?,?)");
+									ps.setInt(1, gnum);
+									ps.setInt(2, newID);
+									ps.executeUpdate();
+									JOptionPane.showMessageDialog(null,"Done!", "Add member successfully",JOptionPane.INFORMATION_MESSAGE);
+									addFrame.setVisible(false);
+									setGinfoPanel(gname);
+									mainWin.setContentPane(ginfo_pane);
+									ginfo_pane.revalidate();
+								}
+							}
+							else{
+								JOptionPane.showMessageDialog(null,"Account "+account.getText()+" does not exist.", "Add member failed",JOptionPane.INFORMATION_MESSAGE);
+							}
+							
+							r.close();
+							ps.close();
+							c.close();
+						}catch(Exception err){
+							System.out.println(err.toString());
+						}
+					}
+				 }  
+			}
 		}
 		class QuitClicked implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
@@ -443,6 +626,16 @@ public class UserInterface {
 								ps.setInt(2,myID);
 								ps.executeUpdate();
 								
+								ps=c.prepareStatement("select count(*) c from pf_detail.belong where gid=?");
+								ps.setInt(1, gnum);
+								r=ps.executeQuery();
+								
+								if(r.next()&&r.getInt("c")==0){
+									ps=c.prepareStatement("delete from pf_detail.groupinfo where gid=?;");
+									ps.setInt(1, gnum);
+									ps.executeUpdate();
+								}
+								
 								ps=c.prepareStatement("select gname from (pf_detail.groupinfo g join pf_detail.belong b on g.gid=b.gid)"
 								 		+ "join pf_detail.memberinfo m on b.mid = m.mid where mac=?");
 								 ps.setString(1, myAccount);
@@ -470,66 +663,230 @@ public class UserInterface {
 				}else{
 					System.out.println("cancel");
 				}
-			}  
+			}
 		}
-		class AddMemClicked implements ActionListener{
+		
+		class EditClicked implements ActionListener{
+			private int select;
+			private JTextField year; 
+			private JTextField month;
+			private JTextField date;
+			private JTextField detail;
+			private JTextField num;
+			private JComboBox payer;
 			public void actionPerformed(ActionEvent e) {
-				if(account.getText().equals("")){
-					JOptionPane.showMessageDialog(null,"Please enter account", "Add member failed",JOptionPane.INFORMATION_MESSAGE);
+				select=detail_tb.getSelectedRow();
+				JPanel edit_pane = new JPanel();
+				edit_pane.setBounds(0,0,700,500);
+				edit_pane.setLayout(null);
+				
+				JPanel show_pane = new JPanel();
+				show_pane.setLayout(null);
+				show_pane.setBounds(160,15,510,430);
+				
+				//NAME
+				JLabel name=new JLabel(gname,2);
+				name.setFont(new Font("Arial", Font.BOLD+Font.ITALIC,32));
+				name.setBounds(10,0,525,40);
+				show_pane.add(name);
+								
+				//DATE
+				JLabel dateMessage = new JLabel("Date (yyyy-mm-dd):");
+				dateMessage.setFont(new Font("Avril", Font.PLAIN, 20));
+				dateMessage.setBounds(20,60,200,20);
+				show_pane.add(dateMessage);
+								
+				String d=detail_tb.getModel().getValueAt(select, 0).toString();
+				
+				year = new JTextField(d.substring(0, 4));
+				year.setBounds(210,60,50,20);
+				show_pane.add(year);
+
+				JLabel line = new JLabel("-");
+				line.setFont(new Font("Avril", Font.PLAIN, 20));
+				line.setBounds(265,60,15,20);
+				show_pane.add(line);
+				 
+				month = new JTextField(d.substring(5, 7));
+				month.setBounds(285,60,50,20);
+				show_pane.add(month);
+				
+				line = new JLabel("-");
+				line.setFont(new Font("Avril", Font.PLAIN, 20));
+				line.setBounds(340,60,15,20);
+				show_pane.add(line);
+
+				date = new JTextField(d.substring(8,10));
+				date.setBounds(360,60,50,20);
+				show_pane.add(date);
+				
+				//Detail
+				JLabel detailMessage = new JLabel("Detail:");
+				detailMessage.setFont(new Font("Avril", Font.PLAIN, 20));
+				detailMessage.setBounds(20,125,70,20);
+				show_pane.add(detailMessage);
+				
+				detail = new JTextField(detail_tb.getModel().getValueAt(select, 1).toString());
+				detail.setBounds(90,120,350,30);
+				show_pane.add(detail);
+				
+				//Num
+				JLabel numMessage = new JLabel("Amount of money: NT ");
+				numMessage.setFont(new Font("Avril", Font.PLAIN, 20));
+				numMessage.setBounds(20,175,220,20);
+				show_pane.add(numMessage);
+				
+				num = new JTextField(detail_tb.getModel().getValueAt(select, 2).toString());
+				num.setBounds(220,170,220,30);
+				show_pane.add(num);
+				
+				//Payer
+				JLabel payerMessage = new JLabel("Payer:");
+				payerMessage.setFont(new Font("Avril", Font.PLAIN, 20));
+				payerMessage.setBounds(20,225,70,20);
+				show_pane.add(payerMessage);
+				
+				try{
+					Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "rita80221");
+					PreparedStatement ps = c.prepareStatement("select mname from pf_detail.belong natural join pf_detail.memberinfo natural join pf_detail.groupinfo where gname=?");
+					ps.setString(1, gname);
+					ResultSet r=ps.executeQuery();
+					ArrayList<String>mem = new ArrayList<String>();
+					while(r.next()){
+						mem.add(r.getString("mname"));
+					}
+					
+					payer = new JComboBox(mem.toArray());
+					payer.setBounds(90,220,200,30);
+					payer.setSelectedItem(detail_tb.getValueAt(select, 3));
+					show_pane.add(payer);
+					c.close();
+					ps.close();
+					r.close();
 				}
-				else{
-					try{
-						Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "rita80221");
-						PreparedStatement ps;
-						ResultSet r;
-						
-						int newID;
-						ps = c.prepareStatement("select mid from pf_detail.memberinfo where mac=?");
-						ps.setString(1, account.getText());
-						r=ps.executeQuery();						
-						
-						if(r.next()){
-							newID=r.getInt("mid");
-							ps=c.prepareStatement("select gid from pf_detail.groupinfo where gname=?");
-							ps.setString(1, gname);
-							r=ps.executeQuery();
-							if(r.next()){
-								gnum=r.getInt("gid");
+				catch(Exception err){
+					System.out.println(err.toString());
+				}
+				
+				//Button editD
+				JButton editD = new JButton("Edit detail");
+				editD.setFont(new Font("Avril", Font.PLAIN, 20));
+				editD.setBounds(350,390,150,30);
+				editD.addActionListener(new EditDClicked());
+				show_pane.add(editD);
+				
+				edit_pane.add(op_pane);
+				edit_pane.add(show_pane);
+				mainWin.setContentPane(edit_pane);
+				edit_pane.revalidate();
+
+				/*
+				int did = Integer.parseInt(detail_tb.getModel().getValueAt(select, 4).toString());
+				setGinfoPanel(gname);
+				mainWin.setContentPane(ginfo_pane);
+				ginfo_pane.revalidate();
+				*/
+			}  
+			class EditDClicked implements ActionListener{
+				public void actionPerformed(ActionEvent e) {
+					int did = Integer.parseInt(detail_tb.getModel().getValueAt(select, 4).toString());
+					int yint = Integer.parseInt(year.getText());
+					int mint = Integer.parseInt(month.getText());
+					int dint = Integer.parseInt(date.getText());
+					if(yint>=1996&&yint<=9999){
+						if(mint<=12&&mint>0){
+							Boolean flag = false;
+							if(mint<=7){
+								if((mint%2)==1&&dint>0&&dint<=31){
+									flag=true;
+								}else if(mint==2&&dint>0&&dint<=29){
+									flag=true;
+								}else if(mint!=2&&mint%2==0&&dint>0&&dint<=30){
+									flag=true;
+								}
+							}else{
+								if((mint%2)==0&&dint>0&&dint<=31){
+									flag=true;
+								}else{
+									if(mint%2==1&&dint>0&&dint<=30){
+										flag=true;
+									}
+								}
 							}
-							ps=c.prepareStatement("select * from pf_detail.belong where gid=? and mid=?");
-							ps.setInt(1, gnum);
-							ps.setInt(2, newID);
-							r=ps.executeQuery();
-							if(r.next()){
-								JOptionPane.showMessageDialog(null,"Account "+account.getText()+" is already in the group", "Add member failed",JOptionPane.INFORMATION_MESSAGE);
-							}
-							else{
-								ps=c.prepareStatement("insert into pf_detail.belong(gid,mid) values(?,?)");
-								ps.setInt(1, gnum);
-								ps.setInt(2, newID);
-								ps.executeUpdate();
-								JOptionPane.showMessageDialog(null,"Done!", "Add member successfully",JOptionPane.INFORMATION_MESSAGE);
-								addFrame.setVisible(false);
+							if(flag){
+								try{
+								Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "rita80221");
+								PreparedStatement ps = c.prepareStatement("select mid from pf_detail.memberinfo where mname =?;");
+								ps.setString(1, payer.getSelectedItem().toString());
+								ResultSet r=ps.executeQuery();
+								if(r.next()){
+									ps = c.prepareStatement("update pf_detail.detail set "
+											+ "ddetail=?, dnum=?, dpayer=?, dupdateby=?, ddate=? "
+											+ "where did=?");
+									ps.setString(1, detail.getText());
+									ps.setInt(2, -Integer.parseInt(num.getText()));
+									ps.setInt(3, r.getInt("mid"));
+									ps.setInt(4, myId);
+									
+									java.text.SimpleDateFormat f = new java.text.SimpleDateFormat("yyyyMMdd");
+									java.util.Date JDate = f.parse(year.getText()+month.getText()+date.getText());														
+									java.sql.Date sqlDate = new java.sql.Date(JDate.getTime());
+									
+									ps.setDate(5, sqlDate);
+									ps.setInt(6, did);
+									ps.executeUpdate();
+								}
+								r.close();
+								c.close();
+								ps.close();
+								}
+								catch(Exception err){
+									System.out.println(err.toString());
+								}
 								setGinfoPanel(gname);
 								mainWin.setContentPane(ginfo_pane);
 								ginfo_pane.revalidate();
 							}
+							else{
+								JOptionPane.showMessageDialog(null,"Invalid date formate", "Add detail failed",JOptionPane.INFORMATION_MESSAGE);
+							}
 						}
 						else{
-							JOptionPane.showMessageDialog(null,"Account "+account.getText()+" does not exist.", "Add member failed",JOptionPane.INFORMATION_MESSAGE);
-						}
-						
-						r.close();
+							JOptionPane.showMessageDialog(null,"Invalid month formate", "Add detail failed",JOptionPane.INFORMATION_MESSAGE);
+							}
+					}else{
+						JOptionPane.showMessageDialog(null,"Invalid year formate", "Add detail failed",JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+			}
+		}
+		class DeleteClicked implements ActionListener{
+			public void actionPerformed(ActionEvent e) {
+				int res = JOptionPane.showConfirmDialog(mainWin,"Are you sure to delete this detail?","Confirm",
+	                    JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE);
+				if(res==JOptionPane.OK_OPTION){
+					int did = Integer.parseInt(detail_tb.getModel().getValueAt(detail_tb.getSelectedRow(), 4).toString());
+					try{
+						Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "rita80221");	
+						PreparedStatement ps = c.prepareStatement("delete from pf_detail.detail where did=?;");
+						ps.setInt(1, did);
+						ps.executeUpdate();
 						ps.close();
 						c.close();
+						setGinfoPanel(gname);
+						mainWin.setContentPane(ginfo_pane);
+						ginfo_pane.revalidate();
 					}catch(Exception err){
 						System.out.println(err.toString());
 					}
 				}
-			 }  
+			}  
 		}
 		
+		private JTable detail_tb;
+		
 		private void setGinfoPanel(String gn){
+			gname=gn;
 			try{			
 				//Var
 				int numOfMem=0;
@@ -634,7 +991,7 @@ public class UserInterface {
 				show_pane.add(groupinfo);
 				
 				//detail
-				ps=c.prepareStatement("select ddate,ddetail,-dnum n,mname from "
+				ps=c.prepareStatement("select ddate,ddetail,-dnum n,mname,did from "
 						+ "pf_detail.detail join pf_detail.memberinfo on dpayer=mid "
 						+"where dbelong = ?");
 				ps.setInt(1,gnum);
@@ -646,13 +1003,34 @@ public class UserInterface {
 					temp.add(r.getString("ddetail"));
 					temp.add(r.getString("n"));
 					temp.add(r.getString("mname"));
+					temp.add(String.valueOf(r.getInt("did")));
 					detail.add(temp.toArray(new String[temp.size()]));
 				}
-				String[] cols ={"Date", "Detail", "Cost", "Payer"};
-				JTable detail_tb = new JTable(detail.toArray(new String[detail.size()][]),cols);
+				String[] cols ={"Date", "Detail", "Cost", "Payer","did"};
+				detail_tb = new JTable(detail.toArray(new String[detail.size()][]),cols);
+				TableColumnModel tcm = detail_tb.getColumnModel();
+				tcm.removeColumn(tcm.getColumn(4));
 				JScrollPane withTitle =new JScrollPane(detail_tb);
-				withTitle.setBounds(20,170,470,260);
+				withTitle.setBounds(20,170,470,220);
 				show_pane.add(withTitle);
+				
+				//button-edit
+				JButton edit = new JButton("Edit");
+				edit.addActionListener(new EditClicked());
+				edit.setBounds(400,390,90,30);
+				show_pane.add(edit);
+				
+				//button-delete
+				JButton delete = new JButton("Delete");
+				delete.addActionListener(new DeleteClicked());
+				delete.setBounds(295,390,90,30);
+				show_pane.add(delete);
+				
+				//button-edit
+				JButton reset = new JButton("Reset");
+				reset.addActionListener(new ResetClicked());
+				reset.setBounds(190,390,90,30);
+				show_pane.add(reset);
 				
 				ginfo_pane = new JPanel();
 				ginfo_pane.setLayout(null);
@@ -722,7 +1100,8 @@ public class UserInterface {
 		}
 		class logClicked implements ActionListener {
 			 public void actionPerformed(ActionEvent e) {
-				 current.setVisible(false);
+				 //current.setVisible(false);
+				 current.dispose();
 				 log_info = new LoginInfo();
 				 current.setVisible(true);
 			 }  
@@ -760,7 +1139,8 @@ public class UserInterface {
 							 JOptionPane.showMessageDialog(null,"Sign up successfully!", "Signed Up",JOptionPane.INFORMATION_MESSAGE);
 							 
 							 //back to login
-							 current.setVisible(false);
+							 //current.setVisible(false);
+							 current.dispose();
 							 log_info = new LoginInfo();
 							 current.setVisible(true);
 						 }
@@ -823,7 +1203,8 @@ public class UserInterface {
 		}
 		class CreAccClicked implements ActionListener {
 			 public void actionPerformed(ActionEvent e) {
-				 current.setVisible(false);
+				 //current.setVisible(false);
+				 current.dispose();
 				 creAcc_info = new CreAccInfo();
 				 current.setVisible(true);
 			 }  
@@ -847,7 +1228,8 @@ public class UserInterface {
 							 myName = r.getString("mname");
 							 myId = r.getInt("mid");
 							 //System.out.println(myName);
-							 current.setVisible(false);
+							 //current.setVisible(false);
+							 current.dispose();
 							 mainWin_info = new MainWindowInfo();
 						 }else{
 							 JOptionPane.showMessageDialog(null,"Wrong password!", "Login failed",JOptionPane.INFORMATION_MESSAGE);
