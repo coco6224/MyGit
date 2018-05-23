@@ -111,3 +111,551 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2018-05-22 13:18:16.722 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.8.0_131
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_TW
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-05-22 13:18:23.505
+!MESSAGE Warning: EGit couldn't detect the installation path "gitPrefix" of native Git. Hence EGit can't respect system level
+Git settings which might be configured in ${gitPrefix}/etc/gitconfig under the native Git installation directory.
+The most important of these settings is core.autocrlf. Git for Windows by default sets this parameter to true in
+this system level configuration. The Git installation location can be configured on the
+Team > Git > Configuration preference page's 'System Settings' tab.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-05-22 13:18:23.506
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Rita Kuo'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 13:21:04.444
+!MESSAGE 'remote-models (http://download.eclipse.org/recommenders/models/kepler/, releases+snapshots)' did not send ETAG header for 'org.eclipse.recommenders:index:zip:0.0.0'.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 13:21:04.750
+!MESSAGE 'remote-models (http://download.eclipse.org/recommenders/models/kepler/, releases+snapshots)' did not send ETAG header for 'org.eclipse.recommenders:index:zip:0.0.0'.
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2018-05-22 13:21:04.769
+!MESSAGE Failed to open search index.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 13:21:04.868
+!MESSAGE 'remote-models (http://download.eclipse.org/recommenders/models/kepler/, releases+snapshots)' did not send ETAG header for 'jre:jre:zip:call:1.0.0'.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 13:21:05.059
+!MESSAGE 'remote-models (http://download.eclipse.org/recommenders/models/kepler/, releases+snapshots)' did not send ETAG header for 'jre:jre:zip:call:1.0.0'.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 13:21:29.538
+!MESSAGE Loading model for 'Component' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 15:14:37.327
+!MESSAGE Loading model for 'JComboBox<E>' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 15:15:21.195
+!MESSAGE Loading model for 'JComboBox<E>' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 15:17:23.770
+!MESSAGE Loading model for 'JComboBox<E>' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 15:17:42.403
+!MESSAGE Loading model for 'JComboBox<E>' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 15:18:00.737
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 15:18:35.593
+!MESSAGE Loading model for 'JComboBox<E>' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 15:19:03.107
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 17:38:09.607
+!MESSAGE Loading model for 'JComboBox<E>' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 17:39:16.028
+!MESSAGE Loading model for 'ArrayList<E>' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 17:39:32.466
+!MESSAGE Loading model for 'JComboBox<E>' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 17:40:00.145
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 17:40:00.663
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 17:40:05.172
+!MESSAGE Loading model for 'ArrayList<E>' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 17:40:19.390
+!MESSAGE Loading model for 'JComboBox<E>' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 17:43:45.610
+!MESSAGE Loading model for 'JComboBox<E>' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 17:44:26.827
+!MESSAGE Loading model for 'JComboBox<E>' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 17:44:44.629
+!MESSAGE Loading model for 'JComboBox<E>' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 17:55:50.467
+!MESSAGE Loading model for 'JFrame' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 17:56:43.211
+!MESSAGE Loading model for 'JFrame' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 17:57:01.181
+!MESSAGE Loading model for 'JFrame' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 17:57:13.214
+!MESSAGE Loading model for 'JFrame' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 17:58:53.887
+!MESSAGE Loading model for 'JFrame' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 17:59:54.248
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 18:01:15.423
+!MESSAGE Loading model for 'JPanel' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 18:02:06.376
+!MESSAGE Loading model for 'JPanel' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 18:02:51.873
+!MESSAGE Loading model for 'JPanel' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 18:03:15.810
+!MESSAGE Loading model for 'JPanel' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 18:03:55.344
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 18:03:58.445
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 18:04:01.139
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-22 18:04:04.297
+!MESSAGE Loading model for 'JFrame' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 08:25:07.869
+!MESSAGE Loading model for 'JFrame' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 08:31:48.217
+!MESSAGE Loading model for 'JPanel' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 08:31:56.223
+!MESSAGE Loading model for 'JPanel' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 08:35:34.502
+!MESSAGE Loading model for 'JLabel' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 08:36:12.384
+!MESSAGE Loading model for 'Font' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 08:36:36.229
+!MESSAGE Loading model for 'JLabel' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 08:38:36.992
+!MESSAGE Loading model for 'JPanel' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 08:46:07.301
+!MESSAGE Loading model for 'JPanel' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 08:46:29.609
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 08:46:29.640
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 08:46:29.656
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 08:46:31.468
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 08:46:35.225
+!MESSAGE Loading model for 'JPanel' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 08:47:11.049
+!MESSAGE Loading model for 'JFrame' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 08:47:16.468
+!MESSAGE Loading model for 'Container' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 08:47:18.308
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 08:47:31.569
+!MESSAGE Loading model for 'JFrame' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 08:49:18.073
+!MESSAGE Loading model for 'JPanel' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 08:52:02.980
+!MESSAGE Loading model for 'JPanel' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 08:52:15.528
+!MESSAGE Loading model for 'JPanel' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:22:09.546
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:27:00.261
+!MESSAGE Loading model for 'JPanel' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:52:44.425
+!MESSAGE Loading model for 'Connection' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:52:47.780
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:52:49.167
+!MESSAGE Loading model for 'Connection' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:52:50.633
+!MESSAGE Loading model for 'Connection' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:52:52.773
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:52:53.301
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:52:53.801
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:52:58.545
+!MESSAGE Loading model for 'Connection' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:55:21.894
+!MESSAGE Loading model for 'PreparedStatement' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:55:48.158
+!MESSAGE Loading model for 'PreparedStatement' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:56:44.587
+!MESSAGE Loading model for 'PreparedStatement' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:56:53.685
+!MESSAGE Loading model for 'ResultSet' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:57:40.755
+!MESSAGE Loading model for 'ArrayList<E>' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:57:44.122
+!MESSAGE Loading model for 'ResultSet' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:57:59.325
+!MESSAGE Loading model for 'ArrayList<E>' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:58:23.262
+!MESSAGE Loading model for 'JComboBox<E>' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:59:07.594
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:59:08.691
+!MESSAGE Loading model for 'PrintStream' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:59:15.465
+!MESSAGE Loading model for 'Exception' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 09:59:26.687
+!MESSAGE Loading model for 'JPanel' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:01:23.093
+!MESSAGE Loading model for 'Connection' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:01:28.082
+!MESSAGE Loading model for 'PreparedStatement' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:01:32.390
+!MESSAGE Loading model for 'ResultSet' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:04:14.099
+!MESSAGE Loading model for 'JButton' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:04:42.219
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:04:48.458
+!MESSAGE Loading model for 'SwingConstants' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:05:06.300
+!MESSAGE Loading model for 'JButton' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:07:18.050
+!MESSAGE Loading model for 'JButton' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:07:58.085
+!MESSAGE Loading model for 'JPanel' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:08:38.670
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:08:40.338
+!MESSAGE Loading model for 'PrintStream' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:18:23.311
+!MESSAGE Loading model for 'DriverManager' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:19:11.846
+!MESSAGE Loading model for 'Connection' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:19:15.043
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:19:20.577
+!MESSAGE Loading model for 'Connection' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:20:33.947
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:20:34.905
+!MESSAGE Loading model for 'PrintStream' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:20:40.735
+!MESSAGE Loading model for 'Exception' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:21:06.408
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:21:11.665
+!MESSAGE Loading model for 'String' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:23:16.269
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:32:53.087
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:32:54.150
+!MESSAGE Loading model for 'PrintStream' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:35:00.272
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:35:01.996
+!MESSAGE Loading model for 'PrintStream' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:35:08.461
+!MESSAGE Loading model for 'Exception' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:35:35.424
+!MESSAGE Loading model for 'DriverManager' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:36:43.253
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:36:47.748
+!MESSAGE Loading model for 'Connection' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:39:14.831
+!MESSAGE Loading model for 'Connection' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:40:04.586
+!MESSAGE Loading model for 'PreparedStatement' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:40:22.321
+!MESSAGE Loading model for 'JComboBox<E>' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:40:32.828
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:40:51.179
+!MESSAGE Loading model for 'PreparedStatement' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:41:10.287
+!MESSAGE Loading model for 'ResultSet' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:41:27.976
+!MESSAGE Loading model for 'PreparedStatement' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:41:45.773
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:42:22.343
+!MESSAGE Loading model for 'String' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:42:24.840
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:42:25.026
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:42:25.202
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:42:25.374
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:42:25.548
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:42:25.719
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:42:25.891
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:42:26.040
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:42:26.208
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:42:26.418
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:42:27.269
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:54:42.245
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:55:38.841
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:55:42.800
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:55:44.803
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:55:46.198
+!MESSAGE Loading model for 'PrintStream' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:58:36.349
+!MESSAGE Loading model for 'Integer' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:58:43.371
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 10:59:24.545
+!MESSAGE Loading model for 'ResultSet' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 11:00:29.979
+!MESSAGE Loading model for 'PreparedStatement' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 11:03:08.563
+!MESSAGE Loading model for 'Integer' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 11:03:25.157
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 11:05:21.367
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 11:09:02.738
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 11:09:48.487
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 11:10:23.438
+!MESSAGE Loading model for 'Integer' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 11:10:33.161
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 11:14:46.276
+!MESSAGE Loading model for 'Object' failed with exception.
+!SESSION 2018-05-23 16:06:09.500 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.8.0_131
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_TW
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-05-23 16:06:19.048
+!MESSAGE Warning: EGit couldn't detect the installation path "gitPrefix" of native Git. Hence EGit can't respect system level
+Git settings which might be configured in ${gitPrefix}/etc/gitconfig under the native Git installation directory.
+The most important of these settings is core.autocrlf. Git for Windows by default sets this parameter to true in
+this system level configuration. The Git installation location can be configured on the
+Team > Git > Configuration preference page's 'System Settings' tab.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-05-23 16:06:19.095
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Rita Kuo'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2018-05-23 16:19:49.731
+!MESSAGE Failed to open search index.
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2018-05-23 16:19:49.795
+!MESSAGE Failed to open search index.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 16:19:50.202
+!MESSAGE Loading model for 'Connection' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 16:21:02.868
+!MESSAGE Loading model for 'PreparedStatement' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 16:21:05.942
+!MESSAGE Loading model for 'PreparedStatement' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 16:21:30.168
+!MESSAGE Loading model for 'PreparedStatement' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 16:21:54.016
+!MESSAGE Loading model for 'ResultSet' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 16:22:26.830
+!MESSAGE Loading model for 'ResultSet' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 16:22:57.205
+!MESSAGE Loading model for 'PreparedStatement' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 16:26:12.207
+!MESSAGE Loading model for 'Connection' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 16:26:16.225
+!MESSAGE Loading model for 'PreparedStatement' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 16:26:20.979
+!MESSAGE Loading model for 'ResultSet' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 16:38:27.055
+!MESSAGE Loading model for 'PreparedStatement' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 16:38:45.992
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 16:39:10.569
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 16:39:16.007
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 16:39:20.315
+!MESSAGE Loading model for 'Object' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 16:39:20.797
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 16:39:21.707
+!MESSAGE Loading model for 'JTextField' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 16:41:01.419
+!MESSAGE Loading model for 'PreparedStatement' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 16:41:20.747
+!MESSAGE Loading model for 'PreparedStatement' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 16:45:03.926
+!MESSAGE Loading model for 'Integer' failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-05-23 16:45:12.657
+!MESSAGE Loading model for 'JTextField' failed with exception.
