@@ -69,7 +69,7 @@ public class UserInterface {
 		private void setOpPane(){
 			try{
 				 //connect
-				 Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "rita80221");
+				 Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "*");
 				 PreparedStatement ps;
 				 ResultSet r;	
 				 
@@ -161,7 +161,7 @@ public class UserInterface {
 			public void actionPerformed(ActionEvent e){
 				try{
 					String newG = JOptionPane.showInputDialog(null,"Enter Group Name:","Create Group",JOptionPane.QUESTION_MESSAGE);
-					Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","rita80221");
+					Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","*");
 					PreparedStatement ps = c.prepareStatement("insert into pf_detail.groupinfo(gname) values(?);");
 					ps.setString(1, newG);
 					ps.executeUpdate();
@@ -287,7 +287,7 @@ public class UserInterface {
 				show_pane.add(payerMessage);
 				
 				try{
-					Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "rita80221");
+					Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "*");
 					PreparedStatement ps = c.prepareStatement("select mname from pf_detail.belong natural join pf_detail.memberinfo natural join pf_detail.groupinfo where gname=?");
 					ps.setString(1, gname);
 					ResultSet r=ps.executeQuery();
@@ -335,7 +335,7 @@ public class UserInterface {
 							int numint=Integer.parseInt(num.getText());
 							if(year.getText().equals("")&&month.getText().equals("")&&date.getText().equals("")){
 								try{
-									Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","rita80221");
+									Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","*");
 									PreparedStatement ps = c.prepareStatement("select gid from pf_detail.groupinfo where gname=?");
 									ps.setString(1, gname);
 									ResultSet r = ps.executeQuery();
@@ -397,7 +397,7 @@ public class UserInterface {
 											}
 											if(flag){
 												try{
-													Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","rita80221");
+													Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","*");
 													PreparedStatement ps = c.prepareStatement("select gid from pf_detail.groupinfo where gname=?");
 													ps.setString(1, gname);
 													ResultSet r = ps.executeQuery();
@@ -482,7 +482,7 @@ public class UserInterface {
 	                    JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE);
 					if(res==JOptionPane.OK_OPTION){
 						try{
-							Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","rita80221");
+							Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","*");
 							PreparedStatement ps = c.prepareStatement("select gid from pf_detail.groupinfo where gname=?;");
 							ps.setString(1, gname);
 							ResultSet r =ps.executeQuery();
@@ -544,7 +544,7 @@ public class UserInterface {
 					}
 					else{
 						try{
-							Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "rita80221");
+							Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "*");
 							PreparedStatement ps;
 							ResultSet r;
 							
@@ -601,7 +601,7 @@ public class UserInterface {
                     JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE);
 				if(res==JOptionPane.OK_OPTION){
 					try{
-						Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "rita80221");
+						Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "*");
 						PreparedStatement ps;
 						ResultSet r;
 						
@@ -747,7 +747,7 @@ public class UserInterface {
 				show_pane.add(payerMessage);
 				
 				try{
-					Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "rita80221");
+					Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "*");
 					PreparedStatement ps = c.prepareStatement("select mname from pf_detail.belong natural join pf_detail.memberinfo natural join pf_detail.groupinfo where gname=?");
 					ps.setString(1, gname);
 					ResultSet r=ps.executeQuery();
@@ -815,7 +815,7 @@ public class UserInterface {
 							}
 							if(flag){
 								try{
-								Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "rita80221");
+								Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "*");
 								PreparedStatement ps = c.prepareStatement("select mid from pf_detail.memberinfo where mname =?;");
 								ps.setString(1, payer.getSelectedItem().toString());
 								ResultSet r=ps.executeQuery();
@@ -867,7 +867,7 @@ public class UserInterface {
 				if(res==JOptionPane.OK_OPTION){
 					int did = Integer.parseInt(detail_tb.getModel().getValueAt(detail_tb.getSelectedRow(), 4).toString());
 					try{
-						Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "rita80221");	
+						Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "*");	
 						PreparedStatement ps = c.prepareStatement("delete from pf_detail.detail where did=?;");
 						ps.setInt(1, did);
 						ps.executeUpdate();
@@ -895,7 +895,7 @@ public class UserInterface {
 				int youllGet=0;
 				
 				//connect
-				Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "rita80221");
+				Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "*");
 				PreparedStatement ps;
 				ResultSet r;
 				
@@ -1117,7 +1117,7 @@ public class UserInterface {
 				 }else{
 					 try{
 						 //connect
-						 Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "rita80221");
+						 Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "*");
 						 
 						 //query
 						 PreparedStatement ps = c.prepareStatement("select mpw from pf_detail.memberInfo where mac=?;");
@@ -1213,7 +1213,7 @@ public class UserInterface {
 			 public void actionPerformed(ActionEvent e) {
 				 try{
 					 //connect
-					 Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "rita80221");
+					 Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "*");
 					 
 					 //query
 					 PreparedStatement ps = c.prepareStatement("select mid, mpw, mname from pf_detail.memberInfo where mac=?;");
